@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+#  liquibase:
+#    url: jdbc:postgresql://localhost:5432/lobby-service
+#    user: postgres
+#    password: root
+#    change-log: db/changelog/db.changelog-master.yaml
+#    driver-class-name: org.postgresql.Driver
+#    enabled: false
+
+server:
+  port: 8082
