@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="02-create-cart-table" author="ss_cart">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_cart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_cart">
+            <column name="cart_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!--Посмотреть, как добавить userId и cartItems-->
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

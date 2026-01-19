@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="03-create-order-table" author="ss_order">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_order"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_order">
+            <column name="cart_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(255)"/>
+
+            <!--Посмотреть, как добавить user и orderItemList -->
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

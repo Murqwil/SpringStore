@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changesets/01_user.xml
+  - include:
+      file: db/changelog/changesets/02_cart.xml
+  - include:
+      file: db/changelog/changesets/03_order.xml
+  - include:
+      file: db/changelog/changesets/04_order_item.xml
+  - include:
+      file: db/changelog/changesets/05_product.xml
+  - include:
+      file: db/changelog/changesets/06_sku.xml
+  - include:
+      file: db/changelog/changesets/07_sku_package.xml
+  - include:
+      file: db/changelog/changesets/08_sku_price.xml
+  - include:
+      file: db/changelog/changesets/09_sku_translation.xml

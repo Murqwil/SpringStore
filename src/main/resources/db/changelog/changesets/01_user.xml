@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="01-create-user-table" author="ss_user">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_user">
+            <column name="user_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)"/>
+            <column name="password" type="VARCHAR"/>
+
+<!--Посмотреть, как добавить enum userRole, cartId, userOrders-->
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

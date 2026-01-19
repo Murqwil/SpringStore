@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="04-create-order-item-table" author="ss_order_item">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_order_item"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_order_item">
+            <column name="item_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="sku_name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="price" type="BIGSERIAL"/>
+
+            <!--Посмотреть, как добавить enum currency и orderId -->
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
