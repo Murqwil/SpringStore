@@ -1,15 +1,15 @@
 package ru.spring.store.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 import ru.spring.store.enums.Local;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@Table(name = "ss_order_item")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItem {
@@ -19,8 +19,11 @@ public class OrderItem {
     private String skuName;
     private String description;
     private BigDecimal price;
+
     @Enumerated(value = EnumType.STRING)
     private Local currency;
 
-    private long orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order orderId;
 }

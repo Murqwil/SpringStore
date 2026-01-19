@@ -1,6 +1,6 @@
 package ru.spring.store.enums;
 
-public enum ProductType implements Category {
+public enum ProductType {
     MEAT,
     CHEESE,
     CHOCOLATE

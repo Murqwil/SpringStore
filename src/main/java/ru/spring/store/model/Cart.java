@@ -1,12 +1,15 @@
 package ru.spring.store.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Table(name = "ss_cart")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
@@ -14,6 +17,15 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cartId;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private long userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "cart_items",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "sku_id")
+    )
+    private Set<SKU> cartItems = new HashSet<>();
 }

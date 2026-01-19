@@ -1,14 +1,16 @@
 package ru.spring.store.model;
 
+import lombok.*;
+import ru.spring.store.enums.Local;
 import ru.spring.store.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Map;
 
 @Entity
 @Table(name = "ss_user")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -17,18 +19,18 @@ public class User {
     private long userId;
     private String name;
     private String lastName;
-    @Enumerated(value = EnumType.STRING)
-    private Role userRole;
-    private String login;
+
     private String email;
+    private String login;
     //TODO: сделать его шифрованным
     private String password;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-    private long cartId;
+    @Enumerated(value = EnumType.STRING)
+    private Role userRole;
 
-//    @OneToOne
-//    @JoinColumn(name = "order_id")
-    private long orderId;
+    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
+    private Cart cartId;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Map<Local,Order> userOrders;
 }

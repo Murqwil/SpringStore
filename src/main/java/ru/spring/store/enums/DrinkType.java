@@ -1,6 +1,6 @@
 package ru.spring.store.enums;
 
-public enum DrinkType implements Category{
+public enum DrinkType {
     SODA,
     JUICE
 }
