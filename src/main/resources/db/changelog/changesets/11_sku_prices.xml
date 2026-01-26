@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="11-create-sku-prices-assoc-table" author="ss_sku">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_prices"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_prices">
+            <column name="sku_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_prices_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="sku_price_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_prices_price"
+                             referencedTableName="ss_sku_price"
+                             referencedColumnNames="sku_price_id"/>
+            </column>
+
+            <column name="locale" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                tableName="ss_sku_prices"
+                columnNames="sku_id, locale"
+                constraintName="pk_sku_prices"/>
+
+        <addUniqueConstraint
+                tableName="ss_sku_prices"
+                columnNames="sku_id, sku_price_id"
+                constraintName="uq_sku_prices_unique"/>
+    </changeSet>
+</databaseChangeLog>

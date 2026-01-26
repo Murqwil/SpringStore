@@ -12,7 +12,7 @@
             </not>
         </preConditions>
         <createTable tableName="ss_order">
-            <column name="cart_id" type="BIGSERIAL">
+            <column name="order_id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -21,6 +21,14 @@
             </column>
 
             <column name="status" type="VARCHAR(255)"/>
+
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_order_user"
+                             referencedTableName="ss_user"
+                             referencedColumnNames="user_id"/>
+            </column>
+
 
             <!--Посмотреть, как добавить user и orderItemList -->
         </createTable>

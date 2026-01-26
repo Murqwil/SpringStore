@@ -37,7 +37,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
-    //TODO: Вот тут: и падает с ошибкой, т.к это всё же не enum
+    //TODO: Вот тут: и падает с ошибкой, т.к это всё же не enum, не понятно, как его представлять в бд
 //    @Enumerated(value = EnumType.STRING)
 //    private Category category;
 }

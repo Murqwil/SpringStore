@@ -16,10 +16,12 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="productName" type="VARCHAR(255)"/>
-            <column name="isAvailable" type="BOOLEAN"/>
-
-            <!--Посмотреть, как добавить enum packageType,skuId,commodityType,drinkType,productType -->
+            <column name="product_name" type="VARCHAR(255)"/>
+            <column name="is_available" type="BOOLEAN"/>
+            <column name="commodity_type" type="VARCHAR(50)"/>
+            <column name="drink_type" type="VARCHAR(50)"/>
+            <column name="product_type" type="VARCHAR(50)"/>
+            <column name="package_type" type="VARCHAR(50)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

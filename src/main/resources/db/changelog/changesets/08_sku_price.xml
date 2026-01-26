@@ -16,10 +16,14 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="price" type="BIGSERIAL"/>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
 
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
 
-<!--Посмотреть, как добавить enum currency-->
         </createTable>
     </changeSet>
 </databaseChangeLog>

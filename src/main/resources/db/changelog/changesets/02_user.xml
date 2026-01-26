@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
 
-    <changeSet id="01-create-user-table" author="ss_user">
+    <changeSet id="02-create-user-table" author="ss_user">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="ss_user"/>
@@ -20,6 +20,8 @@
             <column name="email" type="VARCHAR(50)"/>
             <column name="login" type="VARCHAR(50)"/>
             <column name="password" type="VARCHAR"/>
+            <column name="user_role" type="VARCHAR(50)"/>
+
 
 <!--Посмотреть, как добавить enum userRole, cartId, userOrders-->
         </createTable>

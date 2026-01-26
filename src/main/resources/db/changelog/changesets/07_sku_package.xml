@@ -15,12 +15,17 @@
             <column name="sku_package_id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-
             <column name="name" type="VARCHAR(255)"/>
+            <column name="uom" type="VARCHAR(50)"/>
+            <column name="amount_type" type="VARCHAR(50)"/>
+            <column name="color_type" type="VARCHAR(50)"/>
 
-
-
-            <!--Посмотреть, как добавить enum uom,amount,colorType и skuId-->
+            <column name="sku_id" type="BIGINT">
+                <constraints unique="true" nullable="false"
+                             foreignKeyName="fk_sku_package_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

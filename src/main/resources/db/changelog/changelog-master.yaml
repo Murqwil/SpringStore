@@ -1,8 +1,8 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changesets/01_user.xml
+      file: db/changelog/changesets/02_user.xml
   - include:
-      file: db/changelog/changesets/02_cart.xml
+      file: db/changelog/changesets/01_cart.xml
   - include:
       file: db/changelog/changesets/03_order.xml
   - include:
@@ -17,3 +17,9 @@ databaseChangeLog:
       file: db/changelog/changesets/08_sku_price.xml
   - include:
       file: db/changelog/changesets/09_sku_translation.xml
+  - include:
+      file: db/changelog/changesets/10_cart_items.xml
+  - include:
+      file: db/changelog/changesets/11_sku_prices.xml
+  - include:
+      file: db/changelog/changesets/12_sku_translations.xml
