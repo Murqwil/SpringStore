@@ -5,17 +5,17 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
-#  jpa:
-#    hibernate:
-#      ddl-auto: create-drop
-
   liquibase:
     url: jdbc:postgresql://localhost:5432/postgres
     user: postgres
     password: root
     change-log: db/changelog/changelog-master.yaml
     driver-class-name: org.postgresql.Driver
-#    enabled: false
 
 server:
   port: 8082
+
+
+
+jwt:
+  secret: 4f5a6b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6g

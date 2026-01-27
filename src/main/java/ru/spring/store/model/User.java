@@ -11,6 +11,7 @@ import java.util.Map;
 @Table(name = "ss_user")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
