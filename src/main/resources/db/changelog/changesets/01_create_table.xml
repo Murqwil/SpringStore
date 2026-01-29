@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <!--Создание таблицы 01 пользователя-->
+    <changeSet id="01-create-user-table" author="ss_user">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_user">
+            <column name="user_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)"/>
+            <column name="password" type="VARCHAR(150)"/>
+            <column name="role" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <!--Создание таблицы 02 корзины-->
+    <changeSet id="02-create-cart-table" author="ss_cart">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_cart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_cart">
+            <column name="cart_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT">
+                <constraints unique="true" nullable="false"
+                             foreignKeyName="fk_cart_user"
+                             referencedTableName="ss_user"
+                             referencedColumnNames="user_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Создание таблицы 03 заказов-->
+    <changeSet id="03-create-order-table" author="ss_order">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_order"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_order">
+            <column name="order_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(255)"/>
+
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_order_user"
+                             referencedTableName="ss_user"
+                             referencedColumnNames="user_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 04 предметы в заказе-->
+    <changeSet id="04-create-order-item-table" author="ss_order_item">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_order_item"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_order_item">
+            <column name="item_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="sku_name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="price" type="DECIMAL(10,2)"/>
+            <column name="currency" type="VARCHAR(50)"/>
+
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_order_item_order"
+                             referencedTableName="ss_order"
+                             referencedColumnNames="order_id"
+                             deleteCascade="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 05 продуктов-->
+    <changeSet id="05-create-product-table" author="ss_product">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_product"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_product">
+            <column name="product_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="product_name" type="VARCHAR(255)"/>
+            <column name="is_available" type="BOOLEAN"/>
+            <column name="commodity_type" type="VARCHAR(50)"/>
+            <column name="drink_type" type="VARCHAR(50)"/>
+            <column name="product_type" type="VARCHAR(50)"/>
+            <column name="package_type" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 06 SKU-->
+    <changeSet id="06-create-sku-table" author="ss_sku">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku">
+            <column name="sku_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sku_name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+
+            <column name="product_id" type="BIGINT">
+                <constraints unique="true" nullable="false"
+                             foreignKeyName="fk_sku_product"
+                             referencedTableName="ss_product"
+                             referencedColumnNames="product_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 07 SKU упаковки товаров-->
+    <changeSet id="07-create-sku-package-table" author="ss_sku_package">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_package"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_package">
+            <column name="sku_package_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="uom" type="VARCHAR(50)"/>
+            <column name="amount_type" type="VARCHAR(50)"/>
+            <column name="color_type" type="VARCHAR(50)"/>
+
+            <column name="sku_id" type="BIGINT">
+                <constraints unique="true" nullable="false"
+                             foreignKeyName="fk_sku_package_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 08 SKU цены-->
+    <changeSet id="08-create-sku-price-table" author="ss_sku_price">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_price"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_price">
+            <column name="sku_price_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 09 SKU перевод-->
+    <changeSet id="09-create-sku-translation-table" author="ss_sku_translation">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_translation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_translation">
+            <column name="translation_id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Создание таблицы 10 предметы в корзине ассоциативная-->
+    <changeSet id="10-create-cart-items-assoc-table" author="ss_cart_items">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_cart_items"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_cart_items">
+            <column name="cart_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cart_items_cart"
+                             referencedTableName="ss_cart"
+                             referencedColumnNames="cart_id"
+                             deleteCascade="true"/>
+            </column>
+            <column name="sku_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cart_items_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                tableName="ss_cart_items"
+                columnNames="cart_id, sku_id"
+                constraintName="pk_cart_items"/>
+    </changeSet>
+
+    <!-- Создание таблицы 11 SKU цены ассоциативная-->
+    <changeSet id="11-create-sku-prices-assoc-table" author="ss_sku">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_prices"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_prices">
+            <column name="sku_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_prices_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="sku_price_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_prices_price"
+                             referencedTableName="ss_sku_price"
+                             referencedColumnNames="sku_price_id"/>
+            </column>
+
+            <column name="locale" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                tableName="ss_sku_prices"
+                columnNames="sku_id, locale"
+                constraintName="pk_sku_prices"/>
+
+        <addUniqueConstraint
+                tableName="ss_sku_prices"
+                columnNames="sku_id, sku_price_id"
+                constraintName="uq_sku_prices_unique"/>
+    </changeSet>
+
+    <!-- Создание таблицы 12 SKU перевод ассоциативная-->
+    <changeSet id="12-create-sku-translations-assoc-table" author="ss_sku">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ss_sku_translations"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ss_sku_translations">
+            <column name="sku_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_translations_sku"
+                             referencedTableName="ss_sku"
+                             referencedColumnNames="sku_id"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="translation_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_sku_translations_translation"
+                             referencedTableName="ss_sku_translation"
+                             referencedColumnNames="translation_id"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="locale" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey
+                tableName="ss_sku_translations"
+                columnNames="sku_id, locale"
+                constraintName="pk_sku_translations"/>
+
+        <addUniqueConstraint
+                tableName="ss_sku_translations"
+                columnNames="sku_id, translation_id"
+                constraintName="uq_sku_translations_unique"/>
+    </changeSet>
+</databaseChangeLog>
