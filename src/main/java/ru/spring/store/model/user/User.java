@@ -1,9 +1,11 @@
-package ru.spring.store.model;
+package ru.spring.store.model.user;
 
 import lombok.*;
 import ru.spring.store.enums.Local;
 import ru.spring.store.enums.Role;
 import jakarta.persistence.*;
+import ru.spring.store.model.cart.Cart;
+import ru.spring.store.model.order.Order;
 
 import java.util.Map;
 
@@ -33,5 +35,5 @@ public class User {
     private Cart cartId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Map<Local,Order> userOrders;
+    private Map<Local, Order> userOrders;
 }

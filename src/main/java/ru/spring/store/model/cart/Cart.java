@@ -1,7 +1,9 @@
-package ru.spring.store.model;
+package ru.spring.store.model.cart;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.spring.store.model.user.User;
+import ru.spring.store.model.sku.SKU;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,8 +1,9 @@
-package ru.spring.store.model;
+package ru.spring.store.model.sku;
 
 import jakarta.persistence.*;
 import lombok.*;
 import ru.spring.store.enums.Local;
+import ru.spring.store.model.product.Product;
 
 import java.util.HashMap;
 import java.util.Map;

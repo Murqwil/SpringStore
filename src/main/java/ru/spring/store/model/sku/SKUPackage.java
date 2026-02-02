@@ -1,9 +1,9 @@
-package ru.spring.store.model;
+package ru.spring.store.model.sku;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.spring.store.enums.AmountType;
-import ru.spring.store.enums.ColorType;
+import ru.spring.store.enums.type.AmountType;
+import ru.spring.store.enums.type.ColorType;
 import ru.spring.store.enums.UOM;
 
 @Entity

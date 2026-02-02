@@ -1,4 +1,4 @@
-package ru.spring.store.enums;
+package ru.spring.store.enums.type;
 
 public enum CommodityType {
     PRODUCT,

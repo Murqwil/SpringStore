@@ -1,13 +1,13 @@
-package ru.spring.store.service.impl;
+package ru.spring.store.service.user.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.spring.store.data.request.CreateUserRequest;
-import ru.spring.store.model.User;
+import ru.spring.store.model.user.User;
 import ru.spring.store.repository.UserRepository;
-import ru.spring.store.service.UserService;
+import ru.spring.store.service.user.UserService;
 
 @Service
 @AllArgsConstructor

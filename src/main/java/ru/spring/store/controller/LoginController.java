@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.spring.store.repository.UserRepository;
-import ru.spring.store.service.JWTService;
+import ru.spring.store.service.jwt.JWTService;
 import ru.spring.store.data.request.LoginRequest;
 import ru.spring.store.data.response.JWTResponse;
-import ru.spring.store.model.User;
+import ru.spring.store.model.user.User;
 
 @RestController
 @RequestMapping("/auth")

@@ -1,8 +1,9 @@
-package ru.spring.store.model;
+package ru.spring.store.model.order;
 
 import jakarta.persistence.*;
 import lombok.*;
 import ru.spring.store.enums.OrderStatus;
+import ru.spring.store.model.user.User;
 
 import java.time.LocalDateTime;
 import java.util.List;

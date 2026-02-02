@@ -1,11 +1,12 @@
-package ru.spring.store.model;
+package ru.spring.store.model.product;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.spring.store.enums.CommodityType;
-import ru.spring.store.enums.DrinkType;
-import ru.spring.store.enums.PackageType;
-import ru.spring.store.enums.ProductType;
+import ru.spring.store.enums.type.CommodityType;
+import ru.spring.store.enums.type.DrinkType;
+import ru.spring.store.enums.type.PackageType;
+import ru.spring.store.enums.type.ProductType;
+import ru.spring.store.model.sku.SKU;
 
 @Entity
 @Table(name = "ss_product")

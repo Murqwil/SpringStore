@@ -1,26 +1,29 @@
-package ru.spring.store.model;
+package ru.spring.store.model.order;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.spring.store.enums.Currency;
 import ru.spring.store.enums.Local;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
-@Table(name = "ss_sku_price")
+@Table(name = "ss_order_item")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SKUPrice {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long itemId;
+    private String skuName;
+    private String description;
     private BigDecimal price;
 
     @Enumerated(value = EnumType.STRING)
-    private Currency currency;
+    private Local currency;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order orderId;
 }

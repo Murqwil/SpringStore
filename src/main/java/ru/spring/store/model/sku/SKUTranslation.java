@@ -1,4 +1,4 @@
-package ru.spring.store.model;
+package ru.spring.store.model.sku;
 
 import jakarta.persistence.*;
 import lombok.*;
