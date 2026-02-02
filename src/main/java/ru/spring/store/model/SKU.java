@@ -2,9 +2,9 @@ package ru.spring.store.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.spring.store.enums.Local;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @Entity
@@ -30,7 +30,7 @@ public class SKU {
     )
     @MapKeyColumn(name = "locale")
     @MapKeyEnumerated(EnumType.STRING)
-    private Map<Local, SKUPrice> skuPrices = new HashMap<>();
+    private Map<Locale, SKUPrice> skuPrices = new HashMap<>();
 
     @ElementCollection
     @CollectionTable(
@@ -39,7 +39,7 @@ public class SKU {
     )
     @MapKeyColumn(name = "local")
     @MapKeyEnumerated(EnumType.STRING)
-    private Map<Local, SKUPrice> translations = new HashMap<>();
+    private Map<Locale, SKUPrice> translations = new HashMap<>();
 
     @OneToOne
     @JoinColumn(name = "product_id")

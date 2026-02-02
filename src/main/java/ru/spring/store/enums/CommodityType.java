@@ -1,6 +1,6 @@
 package ru.spring.store.enums;
 
-public enum CommodityType {
+public enum CommodityType implements Category {
     PRODUCT,
     DRINK
 }

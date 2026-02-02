@@ -3,11 +3,8 @@ package ru.spring.store.model;
 import jakarta.persistence.*;
 import lombok.*;
 import ru.spring.store.enums.Currency;
-import ru.spring.store.enums.Local;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
 @Table(name = "ss_sku_price")

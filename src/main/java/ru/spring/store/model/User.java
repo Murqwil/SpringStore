@@ -1,10 +1,10 @@
 package ru.spring.store.model;
 
 import lombok.*;
-import ru.spring.store.enums.Local;
 import ru.spring.store.enums.Role;
 import jakarta.persistence.*;
 
+import java.util.Locale;
 import java.util.Map;
 
 @Entity
@@ -32,5 +32,5 @@ public class User {
     private Cart cartId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Map<Local,Order> userOrders;
+    private Map<Locale,Order> userOrders;
 }

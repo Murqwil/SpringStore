@@ -2,9 +2,10 @@ package ru.spring.store.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.spring.store.enums.Local;
+
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 @Entity
 @Table(name = "ss_order_item")
@@ -21,7 +22,7 @@ public class OrderItem {
     private BigDecimal price;
 
     @Enumerated(value = EnumType.STRING)
-    private Local currency;
+    private Locale currency;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
